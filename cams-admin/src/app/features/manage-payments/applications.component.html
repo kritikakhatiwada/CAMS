@@ -1,0 +1,280 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between mb-2">
+        <h1 class="h3 mb-2 text-gray-800">Manage Payments</h1>
+        <!-- <p class="mb-4">This is applications tables</p> -->
+        <!-- <button class="btn btn-primary" (click)="open(content)">
+          Add Applications
+        </button> -->
+      </div>
+
+      <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Payments</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Application id</th>
+                  <th>User Name</th>
+                  <th>Total amount</th>
+                  <th>Transaction id</th>
+                  <th>PIDX</th>
+                  <th>Fee</th>
+                  <th>Refunded</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of payments">
+                  <td>{{ payment.id }}</td>
+                  <td>{{ payment.application_id }}</td>
+                  <td>{{ payment.userName }}</td>
+                  <td>NPR {{ payment.total_amount / 100 }}</td>
+                  <td>{{ payment.transaction_id }}</td>
+                  <td>{{ payment.pidx }}</td>
+                  <td>NPR {{ payment.fee }}</td>
+                  <td>
+                    <span [class]="payment.refunded ? 'badge bg-success' : 'badge bg-danger'">
+                      {{ payment.refunded ? 'Yes' : 'No' }}
+                    </span>
+                  </td>
+                  <td>
+                    <span [class]="'badge ' + (payment.status === 'Completed' ? 'bg-success' : 'bg-warning')">
+                      {{ payment.status }}
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="payments.length === 0">
+                  <td colspan="11" class="text-center">No payments found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add Applications</h4>
+    <!-- Bootstrap 5 uses button with 'btn-close' for closing modals -->
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <form action="">
+    <div class="modal-body">
+      <form class="row g-3" id="contact_form">
+        <!-- Form Name -->
+        <legend>Contact Us Today!</legend>
+
+        <!-- First Name -->
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="first_name"
+              placeholder="First Name"
+            />
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Last Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              name="last_name"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+
+        <!-- E-Mail -->
+        <div class="col-md-12">
+          <label for="email" class="form-label">E-Mail</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="E-Mail Address"
+            />
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="col-md-12">
+          <label for="phone" class="form-label">Phone #</label>
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="bi bi-telephone"></i
+            ></span>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              placeholder="(845)555-1212"
+            />
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="col-md-12">
+          <label for="address" class="form-label">Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-house"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              name="address"
+              placeholder="Address"
+            />
+          </div>
+        </div>
+
+        <!-- City -->
+        <div class="col-md-6">
+          <label for="city" class="form-label">City</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-building"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              name="city"
+              placeholder="City"
+            />
+          </div>
+        </div>
+
+        <!-- State -->
+        <div class="col-md-6">
+          <label for="state" class="form-label">State</label>
+          <select class="form-select" id="state" name="state">
+            <option value="">Please select your state</option>
+            <!-- Add other states options -->
+          </select>
+        </div>
+
+        <!-- Zip Code -->
+        <div class="col-md-6">
+          <label for="zip" class="form-label">Zip Code</label>
+          <div class="input-group">
+            <span class="input-group-text"
+              ><i class="bi bi-envelope-open"></i
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              id="zip"
+              name="zip"
+              placeholder="Zip Code"
+            />
+          </div>
+        </div>
+
+        <!-- Website or Domain Name -->
+        <div class="col-md-6">
+          <label for="website" class="form-label">Website or Domain Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="website"
+              name="website"
+              placeholder="Website or domain name"
+            />
+          </div>
+        </div>
+
+        <!-- Hosting -->
+        <div class="col-md-12">
+          <label class="form-label">Do you have hosting?</label>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="hosting"
+              value="yes"
+              id="hostingYes"
+            />
+            <label class="form-check-label" for="hostingYes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="hosting"
+              value="no"
+              id="hostingNo"
+            />
+            <label class="form-check-label" for="hostingNo">No</label>
+          </div>
+        </div>
+
+        <!-- Project Description -->
+        <div class="col-md-12">
+          <label for="comment" class="form-label">Project Description</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+            <textarea
+              class="form-control"
+              id="comment"
+              name="comment"
+              placeholder="Project Description"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Success message -->
+        <div
+          class="alert alert-success mt-3 d-none"
+          id="success_message"
+          role="alert"
+        >
+          Success! <i class="bi bi-hand-thumbs-up"></i> Thanks for contacting
+          us, we will get back to you shortly.
+          
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.close('Close click')"
+      >
+        Close
+      </button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </form>
+</ng-template>

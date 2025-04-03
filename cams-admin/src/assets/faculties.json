@@ -1,0 +1,22 @@
+[
+    { "id": 1, "name": "Management" },
+    { "id": 2, "name": "Science and Technology" },
+    { "id": 3, "name": "Education" },
+    { "id": 4, "name": "Humanities and Social Sciences" },
+    { "id": 5, "name": "Engineering" },
+    { "id": 6, "name": "Medicine" },
+    { "id": 7, "name": "Agriculture and Forestry" },
+    { "id": 8, "name": "Law" },
+    { "id": 9, "name": "Arts" },
+    { "id": 10, "name": "Pharmacy" },
+    { "id": 11, "name": "Nursing" },
+    { "id": 12, "name": "Tourism and Hospitality Management" },
+    { "id": 13, "name": "Veterinary Science" },
+    { "id": 14, "name": "Architecture" },
+    { "id": 15, "name": "Information Technology" },
+    { "id": 16, "name": "Environmental Science" },
+    { "id": 17, "name": "Fine Arts" },
+    { "id": 18, "name": "Business Studies" },
+    { "id": 19, "name": "Sports Science" },
+    { "id": 20, "name": "Biotechnology" }
+]

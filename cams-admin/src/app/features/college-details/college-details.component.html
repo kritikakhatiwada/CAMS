@@ -1,0 +1,311 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between mb-2">
+        <h1 class="h3 mb-2 text-gray-800">College</h1>
+        <button class="btn btn-primary" (click)="open(content)">
+          Add College
+        </button>
+      </div>
+
+      <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">College</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Contact</th>
+                  <th>Email</th>
+                  <th>Website</th>
+                  <th>Courses</th>
+                  <th>View</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of collegeData">
+                  <td>{{ data.name }}</td>
+                  <td>{{ data.location }}</td>
+                  <td>{{ data.contact }}</td>
+                  <td>{{ data.email }}</td>
+                  <td><a href="{{ data.website }}">{{ data.website }}</a></td>
+                    <td>
+      <!-- Replace the courses list with a button -->
+      <button class="btn btn-primary btn-sm" (click)="viewCourses(data.courses, coursesModal)">
+        <i class="bi bi-book"></i> View Courses
+      </button>
+    </td>
+                  <td>
+                    <button class="btn btn-info btn-sm" (click)="viewCollegeDetailById(data.id, collegeDetailsModal)">
+                      <i class="bi bi-eye"></i> View
+                    </button>
+                  </td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <button
+                      class="btn btn-warning btn-sm"
+                      (click)="editCollege(data, content)"
+                    >
+                      <i class="bi bi-pencil"></i> Edit
+                    </button>
+                      <button class="btn btn-danger btn-sm" (click)="deleteCollege(data.id)">
+                        <i class="bi bi-trash"></i> Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ isEditMode ? 'Edit College' : 'Add College' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <form [formGroup]="formStructure" (ngSubmit)="isEditMode ? onUpdate() : onSubmit()">
+    <div class="modal-body">
+      <!-- Form Name -->
+      <legend>Contact Us Today!</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="name" class="form-label">College Name</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              id="Name"
+              placeholder="College Name"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="collegeLogo" class="form-label">College Logo</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              type="file"
+              class="form-control"
+              formControlName="collegeLogo"
+              id="collegeLogo"
+              accept="image/*"
+              (change)="onImageChange($event)"
+            />
+          </div>
+          <!-- Show Previous Image if Available -->
+          <img *ngIf="formStructure.value.collegeLogo" [src]="formStructure.value.collegeLogo" alt="College Logo" style="max-width: 100px; margin-top: 10px;">
+        </div>
+        
+
+        <div class="col-md-6">
+          <label for="userSelect" class="form-label">Select User Email</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <ng-select
+              id="userSelect"
+              formControlName="belongsTo"
+              [items]="users"
+              bindLabel="email"
+              bindValue="id"
+              placeholder="Select an email"
+            ></ng-select>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <label for="address" class="form-label">Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-house"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="location"
+              id="address"
+              placeholder="Address"
+            />
+          </div>
+        </div>
+
+        <!-- New Fields -->
+        <div class="col-md-6">
+          <label for="does_accept_first_year_applications" class="form-label">Accepts First Year Applications</label>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              formControlName="does_accept_first_year_applications"
+              id="does_accept_first_year_applications"
+            />
+            <label class="form-check-label" for="does_accept_first_year_applications">Yes</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="is_public" class="form-label">Public College</label>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              formControlName="is_public"
+              id="is_public"
+            />
+            <label class="form-check-label" for="is_public">Yes</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="is_private" class="form-label">Private College</label>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              formControlName="is_private"
+              id="is_private"
+            />
+            <label class="form-check-label" for="is_private">Yes</label>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="student_capacity" class="form-label">Student Capacity</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person"></i></span>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="student_capacity"
+              id="student_capacity"
+              placeholder="Enter capacity"
+              min="0"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Success message -->
+      <div class="alert alert-success mt-3 d-none" id="success_message" role="alert">
+        Success! <i class="bi bi-hand-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode ? 'Save Changes' : 'Save' }}
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+
+
+<!-- Modal for College Details -->
+<ng-template #collegeDetailsModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">View College Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body row">
+    <!-- Left Column for Image (col-6) -->
+    <div class="col-6">
+      <div class="image-container">
+        <img *ngIf="collegeById?.collegeLogo; else noImage" [src]="collegeById?.collegeLogo" alt="College Image" class="img-fluid" />
+        <ng-template #noImage>
+          <div class="no-image-placeholder">No Image Available</div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Right Column for College Details (col-6) -->
+    <div class="col-6">
+      <p><strong>Name:</strong> {{ collegeById?.name || 'Loading...' }}</p>
+      <p><strong>Address:</strong> {{ collegeById?.location || 'Loading...' }}</p>
+      <p><strong>Contact:</strong> {{ collegeById?.contact || 'Loading...' }}</p>
+      <p><strong>Email:</strong> {{ collegeById?.email || 'Loading...' }}</p>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <p><strong>Description:</strong></p>
+    <div *ngIf="collegeById?.description; else noDescription" [innerHTML]="collegeById?.description">
+     
+    </div>
+    <ng-template #noDescription>
+      <p>There is no description available.</p>
+    </ng-template>
+
+    <div class="mt-4">
+      <h5 class="text-primary">Courses Offered</h5>
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Course Name</th>
+                  <th>No. of Seats</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let course of collegeById.courses">
+                  <td>{{course.name}}</td>
+                  <td>{{course.seatsAvailable}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+  </div>
+</ng-template>
+
+<!-- Add this at the bottom of your HTML file -->
+<ng-template #coursesModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">College Courses</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Seats Available</th>
+            <th>Duration (Years)</th>
+            <th>Fee</th>
+            <th>Requirement</th>
+            <th>Required Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of selectedCourses">
+            <td>{{course.name}}</td>
+            <td>{{course.seatsAvailable}}</td>
+            <td>{{course.durationInYears}}</td>
+            <td>{{course.fee | currency:'NPR '}}</td>
+            <td>{{course.requirement}}</td>
+            <td>{{course.reqGrade}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+  </div>
+</ng-template>

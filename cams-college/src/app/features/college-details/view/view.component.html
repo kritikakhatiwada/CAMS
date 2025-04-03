@@ -1,0 +1,125 @@
+<div class="container-fluid p-0">
+  <!-- Full Content Section (Scrollable) -->
+  <div class="content-wrapper" style="max-height: 65vh; overflow-y: auto;">
+    <!-- Cover Image Section -->
+    <div class="cover-image position-relative">
+      <img
+        src="{{ coverImage }}"
+        alt="Cover Image"
+        class="img-fluid w-100"
+        style="height: 300px; object-fit: cover;"
+      />
+    </div>
+
+    <!-- Logo and College Details Section -->
+    <div class="container mt-5">
+      <div class="row align-items-center">
+        <!-- Logo Section -->
+        <div class="col-md-3 text-center">
+          <div
+            class="logo-container"
+            style="margin-top: -75px;"
+          >
+            <img
+              src="{{ collegeDetail?.collegeLogo }}"
+              alt="{{ collegeDetail?.name }}"
+              class="rounded-circle border border-white shadow"
+              style="width: 150px; height: 150px; object-fit: cover;"
+            />
+          </div>
+        </div>
+
+        <!-- College Name and Details -->
+        <div class="col-md-9">
+          <h1 class="text-primary fw-bold">{{ collegeDetail?.name }}</h1>
+          <div class="row text-secondary mt-3">
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-geo-alt-fill"></i>
+              <strong>Location:</strong> {{ collegeDetail?.location }}
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-telephone-fill"></i>
+              <strong>Contact:</strong> {{ collegeDetail?.contact }}
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-envelope-fill"></i>
+              <strong>Email:</strong>
+              <a href="mailto:{{ collegeDetail?.email }}" class="text-decoration-none">{{
+                collegeDetail?.email
+              }}</a>
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-globe"></i>
+              <strong>Website:</strong>
+              <a href="{{ collegeDetail?.website }}" target="_blank" class="text-decoration-none">{{
+                collegeDetail?.website
+              }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses Offered Section -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3 class="text-primary mb-3">Courses Offered</h3>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="table-primary">
+                <tr>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">No. of Seats</th>
+                  <th scope="col">Requirement</th>
+                  <th scope="col">Required Grade</th>
+                  <th scope="col">Fee</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Scholarship</th>
+                  <th scope="col">Scholarship Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of collegeDetail?.courses">
+                  <td>{{ course.name }}</td>
+                  <td>{{ course.seatsAvailable }}</td>
+                  <td>{{ course.requirement }}</td>
+                  <td> {{ course.reqGrade }} </td>
+                  <td> {{ course.fee }} </td>
+                  <td> {{ course.durationInYears }} years </td>
+                  <td> {{ course.scholarshipsAvailable }} </td>
+                  <td> {{ course.scholarshipDetails }} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- About the College (Scrollable Content) -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div
+            class="content text-secondary"
+            [innerHTML]="sanitizedDescription"
+            style="max-height: 400px; ">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+      <!-- Action Buttons -->
+      <div class="row mt-4">
+        <div class="col-12 text-end">
+          <button class="btn btn-primary btn-lg" routerLink="/college-details/add">
+            <i class="bi bi-pencil-fill"></i> Update Details
+          </button>
+  
+          <!-- Preview Button (opens content in new tab) -->
+          <button class="btn btn-info btn-lg ms-2" (click)="openPreview()">
+            <i class="bi bi-eye-fill"></i> Preview
+          </button>
+        </div>
+      </div>
+</div>
