@@ -1,0 +1,130 @@
+login {
+    background: linear-gradient(to bottom, #6887bc 20%, #ffffff 80%);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+}
+.main-container{
+    margin-top: 7rem;
+}
+
+.main-content {
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    display: flex;
+    overflow: hidden;
+    max-width: 800px;
+}
+
+.company__info {
+    background: linear-gradient(to bottom, #6887bc 20%, #ffffff 90%);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding: 2em;
+}
+
+.company__info h4 {
+    margin-top: 1em;
+    font-size: 1.8em;
+}
+
+.login_form {
+    background-color: #fff;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
+}
+
+.row > h2 {
+    color: #008080;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.form__input {
+    width: 100%;
+    border: 0px solid transparent;
+    border-bottom: 1px solid #aaa;
+    padding: 1em 0.5em 0.5em 2em;
+    outline: none;
+    margin: 1.5em auto;
+    transition: all 0.5s ease;
+    font-size: 1em;
+}
+
+.form__input:focus {
+    border-bottom-color: #008080;
+    box-shadow: 0 0 5px rgba(0, 80, 80, 0.4);
+    border-radius: 4px;
+}
+
+.btn {
+    transition: all 0.5s ease;
+    width: 70%;
+    border-radius: 30px;
+    color: #008080;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #008080;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: #008080;
+    color: #fff;
+}
+
+p {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 1em;
+}
+
+p a {
+    color: #008080;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 640px) {
+    .main-content {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .company__info {
+        display: none;
+    }
+
+    .login_form {
+        border-radius: 20px;
+    }
+}
+
+@media screen and (min-width: 642px) and (max-width: 800px) {
+    .main-content {
+        width: 70%;
+    }
+}

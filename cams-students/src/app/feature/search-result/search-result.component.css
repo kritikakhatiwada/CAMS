@@ -1,0 +1,68 @@
+.college-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.college-card:hover {
+  transform: translateY(-5px);
+}
+
+.college-cover {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.college-cover-image {
+  object-fit: cover;
+  height: 100%;
+}
+
+.view-details-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.college-card:hover .view-details-overlay {
+  opacity: 1;
+}
+
+.college-logo-container {
+  margin-top: -40px;
+  position: absolute;
+  top: 27%;
+  left: 40%;
+  z-index: 2;
+}
+
+.college-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-color: #f8f9fa;
+  object-fit: cover;
+}
+
+.college-details {
+  margin-top: 15px;
+  padding: 15px;
+}
+
+.college-details h5 {
+  font-weight: 600;
+}
+
+.college-details p {
+  color: #6c757d;
+  font-size: 14px;
+}

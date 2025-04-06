@@ -1,0 +1,58 @@
+<section class="explore-section section-padding" id="section_2">
+  <div class="container">
+    <div class="col-12 text-center">
+      <h2 class="mb-4">Explore Colleges</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-12 mb-4" *ngFor="let college of colleges">
+        <div class="college-card shadow-lg bg-white d-flex flex-column position-relative">
+          <!-- Cover Image -->
+          <div class="college-cover position-relative">
+            <img
+              src="{{ coverImage }}"
+              class="college-cover-image img-fluid w-100"
+              alt="{{ college.name }}"
+            />
+            <!-- Hover Eye Button -->
+            <div class="view-details-overlay d-flex justify-content-center align-items-center">
+              <a routerLink="/college/{{ college.id }}" class="btn btn-outline-primary">
+                <i class="bi-eye me-2"></i> View Details
+              </a>
+            </div>
+          </div>
+
+          <!-- College Logo -->
+          <div class="college-logo-container text-center mt-4">
+            <img
+              src="{{ college.collegeLogo }}"
+              class="college-logo img-fluid"
+              alt="{{ college.name }}"
+            />
+          </div>
+
+          <!-- College Details -->
+          <div class="college-details text-center mt-5">
+            <h5 class="mb-2">{{ college.name }}</h5>
+            <p class="mb-1 text-muted">{{ college.location }}</p>
+            <p class="mb-1 text-muted">{{ college.contact }}</p>
+            <p class="mb-1 text-muted">{{ college.email }}</p>
+            
+
+            <!-- Star Rating -->
+            <div class="college-rating mt-3">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                <i
+                  class="bi"
+                  [ngClass]="i < college.avg_rating ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"
+                ></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

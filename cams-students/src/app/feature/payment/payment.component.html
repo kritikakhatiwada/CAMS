@@ -1,0 +1,110 @@
+<style>
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+    .modal-confirm {		
+        color: #636363;
+        max-width: 500px;
+        font-size: 16px;
+    }
+    .modal-confirm .modal-content {
+        padding: 30px;
+        border-radius: 10px;
+        border: none;
+    }
+    .modal-confirm .modal-header {
+        border-bottom: none;   
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 28px;
+        margin: 30px 0 -10px;
+    }
+    .modal-confirm .form-control, .modal-confirm .btn {
+        min-height: 45px;
+        border-radius: 5px; 
+    }
+    .modal-confirm .close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+    }	
+    .modal-confirm .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 14px;
+    }	
+    .modal-confirm .icon-box {
+        color: #fff;		
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -80px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        z-index: 9;
+        background: #28a745; 
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .modal-confirm .icon-box i {
+        font-size: 60px;
+    }
+    .modal-confirm.modal-dialog {
+        margin-top: 100px;
+    }
+    .modal-confirm .btn {
+        color: #fff;
+        border-radius: 6px;
+        background: #28a745;
+        text-decoration: none;
+        transition: all 0.4s;
+        line-height: normal;
+        border: none;
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+        background: #218838;
+        outline: none;
+    }
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
+    }
+</style>
+
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal-dialog modal-confirm modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="icon-box" [ngClass]="paymentStatusMessage === 'Payment successful' ? 'success' : 'failed'">
+                <i [class.bi-check-circle-fill]="paymentStatusMessage === 'Payment successful'"
+                   [class.bi-x-circle-fill]="paymentStatusMessage !== 'Payment successful'"></i>
+            </div>				
+            <h4 class="modal-title w-100">{{ paymentStatusMessage === 'Payment successful' ? 'Awesome!' : 'Oops!' }}</h4>	
+        </div>
+        <div class="modal-body text-center">
+            <p>{{ paymentStatusMessage }}</p>
+            <div *ngIf="applicationId && pidx">
+                <p><strong>Application ID:</strong> {{ applicationId }}</p>
+                <p><strong>Pidx:</strong> {{ pidx }}</p>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button class="btn btn-success btn-block" *ngIf="paymentStatusMessage === 'Payment successful'" data-dismiss="modal" routerLink="/my-applications">OK</button>
+            <button class="btn btn-danger btn-block" *ngIf="paymentStatusMessage !== 'Payment successful'" data-dismiss="modal">Retry</button>
+        </div>
+    </div>
+</div>
+

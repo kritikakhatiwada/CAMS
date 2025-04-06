@@ -1,0 +1,91 @@
+<section class="bg-light py-5">
+  <div class="container">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h1 class="display-4 font-weight-bold">Student Profile</h1>
+      <p class="lead text-muted">
+        A comprehensive overview of the student's details
+      </p>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="mb-4 shadow-lg p-4 bg-white">
+      <div class="row align-items-start">
+        <!-- Profile Image Section -->
+        <div class="col-md-3 text-center">
+          <div class="profile-picture-container">
+            <img
+              [src]="studentData.user.imageUrl || 'assets/default-profile.png'"
+              alt="Profile Picture"
+              class="rounded-circle img-fluid profile-picture"
+            />
+          </div>
+
+          
+        </div>
+
+        <!-- Student Information Section -->
+        <div class="col-md-9 d-flex">
+          <div class="flex-grow-1">
+            <div class="bg-info text-white p-3 rounded">
+              <h4 class="mb-0">Student Information</h4>
+            </div>
+            <div class="p-3">
+              <p>
+                <strong>Name:</strong> {{ studentData.user.firstName }}
+                {{ studentData.user.lastName }}
+              </p>
+              <p><strong>Phone:</strong> {{ studentData.user.phone }}</p>
+              <p><strong>Email:</strong> {{ studentData.user.email }}</p>
+              <p><strong>Address:</strong> {{ studentData.user.address }}</p>
+              <p>
+                <strong>Birth Date:</strong>
+                {{ studentData.birthDate | date : "yyyy-MM-dd" }}
+              </p>
+              <p><strong>Gender:</strong> {{ studentData.gender }}</p>
+            </div>
+          </div>
+
+          <!-- Vertical Line -->
+          <div class="vr mx-4"></div>
+
+          <!-- Parent Information Section -->
+          <div class="flex-grow-1">
+            <div class="bg-info text-white p-3 rounded">
+              <h4 class="mb-0">Parents/Guardian Information</h4>
+            </div>
+            <div class="p-3">
+              <p><strong>Parent/Guardian:</strong> {{ studentData.parentName }}</p>
+              <p><strong>Parent Email:</strong> {{ studentData.parentEmail }}</p>
+              <p><strong>Parent Phone:</strong> {{ studentData.parentContact }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="mb-4 shadow-lg p-4 bg-white">
+      <div class="bg-info text-white p-3 rounded">
+        <h5 class="mb-0">Educational Background</h5>
+      </div>
+      <div class="p-3">
+        <div class="row mb-4">
+          <div class="col-md-6" *ngFor="let edu of studentData.education">
+            <h6>{{ edu.collegeName }}</h6>
+            <p>
+              <strong>Degree:</strong> {{ edu.degree || "Degree not provided" }}<br />
+              <strong>Start Year:</strong> {{ edu.startedYear | date : "yyyy-MM-dd" }}<br />
+              <strong>End Year:</strong> {{ edu.PassedYear | date : "yyyy-MM-dd" }}<br />
+              <strong>CGPA:</strong> {{ edu.cgpa || "CGPA not provided" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="btn" (click)="onUpdate(studentData.id)">
+      <i class="bi bi-pencil-fill"></i> Update
+    </button>
+  </div>
+</section>

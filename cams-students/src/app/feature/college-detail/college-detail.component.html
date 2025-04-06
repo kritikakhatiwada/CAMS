@@ -1,0 +1,414 @@
+<div class="container-fluid p-0">
+  <!-- Full Content Section (Scrollable) -->
+  <div class="content-wrapper">
+    <!-- Cover Image Section -->
+    <div class="cover-image position-relative">
+      <img
+        src="{{ coverImage }}"
+        alt="Cover Image"
+        class="img-fluid w-100"
+        style="height: 300px; object-fit: cover"
+      />
+    </div>
+
+    <!-- Logo and College Details Section -->
+    <div class="container mt-5">
+      <div class="row align-items-center">
+        <!-- Logo Section -->
+        <div class="col-md-3 text-center">
+          <div class="logo-container">
+            <img
+              src="{{ collegeDetail?.collegeLogo }}"
+              alt="{{ collegeDetail?.name }}"
+              class="rounded-circle border border-white shadow"
+              style="width: 150px; height: 150px; object-fit: cover"
+            />
+          </div>
+        </div>
+
+        <!-- College Name and Details -->
+        <div class="col-md-9">
+          <h1 class="text-primary fw-bold">{{ collegeDetail?.name }}</h1>
+          <div class="row text-secondary mt-3">
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-geo-alt-fill"></i>
+              <strong>Location:</strong> {{ collegeDetail?.location }}
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-telephone-fill"></i>
+              <strong>Contact:</strong> {{ collegeDetail?.contact }}
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-envelope-fill"></i>
+              <strong>Email:</strong>
+              <a
+                href="mailto:{{ collegeDetail?.email }}"
+                class="text-decoration-none"
+              >
+                {{ collegeDetail?.email }}
+              </a>
+            </div>
+            <div class="col-md-6 mb-2">
+              <i class="bi bi-globe"></i>
+              <strong>Website:</strong>
+              <a
+                href="{{ collegeDetail?.website }}"
+                target="_blank"
+                class="text-decoration-none"
+              >
+                {{ collegeDetail?.website }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4" *ngIf="isLoggedIn()">
+        <div class="col-12 d-flex justify-content-end">
+          <button
+            class="btn btn-success me-2"
+            (click)="applyToCollege(collegeDetail?.id, content)"
+          >
+            <i class="bi bi-check-circle"></i> Apply
+          </button>
+
+          <div *ngIf="!isFavorite">
+            <button
+              class="btn btn-outline-danger"
+              (click)="addToFavorites(collegeDetail.id)"
+            >
+              <i class="bi bi-heart" style="color: red"></i> Add to Favorites
+            </button>
+          </div>
+
+          <div *ngIf="isFavorite">
+            <button
+              class="btn btn-outline-secondary"
+              (click)="removeFromFavorites(collegeDetail.id)"
+            >
+              <i class="bi bi-heart-fill" style="color: red"></i> Added to
+              Favorites
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses Offered Section -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3 class="text-primary mb-3">Courses Offered</h3>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="table-primary">
+                <tr>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">No. of Seats</th>
+                  <th scope="col">Requirement</th>
+                  <th scope="col">Required Grade</th>
+                  <th scope="col">Fee</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Scholarship</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of collegeDetail?.courses">
+                  <td>{{ course.name }}</td>
+                  <td>{{ course.seatsAvailable }}</td>
+                  <td>{{ course.requirement }}</td>
+                  <td>{{ course.reqGrade }}</td>
+                  <td>Rs {{ course.fee }}</td>
+                  <td>{{ course.durationInYears }} years</td>
+                  <td>
+                    <!-- Scholarship column with conditionally displaying the message and checkmark -->
+
+                    <span *ngIf="course.scholarshipsAvailable">
+                      Scholarship Available ✅</span
+                    >
+
+                    <span *ngIf="course.scholarshipsAvailable">
+                      {{ course.scholarshipsAvailable }} Scholarship Available
+                      ✅</span
+                    >
+
+                    <span *ngIf="!course.scholarship"></span>
+                  </td>
+                  <td>{{ course.scholarshipDetails }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- About the College -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div
+            class="content text-secondary"
+            [innerHTML]="sanitizedDescription"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Display Reviews -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <h4 class="text-primary">User Reviews</h4>
+          <div *ngFor="let review of reviews" class="border p-3 rounded my-3">
+            <div class="d-flex align-items-center">
+              <!-- Profile Icon -->
+              <div class="me-2">
+                <img
+                  *ngIf="review.user?.imageUrl"
+                  [src]="review.user?.imageUrl"
+                  alt="User Profile"
+                  class="rounded-circle"
+                  style="width: 40px; height: 40px; object-fit: cover"
+                />
+              </div>
+
+              <!-- User Name and Email -->
+              <div>
+                <strong
+                  >{{ review.user?.firstName }}
+                  {{ review.user?.lastName }}</strong
+                >
+                <div class="text-secondary">
+                  <span class="text-warning">
+                    <i
+                      *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                      class="bi"
+                      [ngClass]="
+                        i < review.rating
+                          ? 'bi-star-fill text-warning'
+                          : 'bi-star text-secondary'
+                      "
+                    >
+                    </i>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Star Rating -->
+            </div>
+
+            <!-- Review Comment -->
+            <p class="text-secondary mt-2">{{ review.comment }}</p>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <!-- ⭐ Review Section -->
+      <div class="row mt-5" *ngIf="isLoggedIn()">
+        <div class="col-12">
+          <h3 class="text-primary mb-3">Rate & Review</h3>
+
+          <!-- Star Rating Input -->
+          <div class="d-flex align-items-center mb-3">
+            <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+              <i
+                class="bi"
+                [ngClass]="{
+                  'bi-star-fill text-warning':
+                    i < hoverRating || i < selectedRating,
+                  'bi-star text-secondary':
+                    i >= hoverRating && i >= selectedRating
+                }"
+                (mouseover)="hoverRating = i + 1"
+                (mouseleave)="hoverRating = 0"
+                (click)="selectRating(i + 1)"
+                style="cursor: pointer; font-size: 24px; margin-right: 5px"
+              ></i>
+            </span>
+            <span class="ms-2 text-secondary">{{ selectedRating }} / 5</span>
+          </div>
+
+          <!-- Review Input -->
+          <textarea
+            [(ngModel)]="reviewComment"
+            class="form-control"
+            rows="3"
+            placeholder="Write your review..."
+          ></textarea>
+
+          <!-- Post Review Button -->
+          <button class="btn btn-primary mt-3" (click)="postReview()">
+            Post Review
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #contentold let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="courseSelectionModalLabel">
+        Apply for a Course
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <!-- Personalized Info Section -->
+      <div class="mb-4">
+        <p>
+          <strong
+            >I'm {{ studentDetails?.user?.firstName }}
+            {{ studentDetails?.user?.lastName }}</strong
+          >
+        </p>
+        <p>
+          I have completed my
+          <strong>{{ studentDetails?.education[0]?.degree }}</strong> degree
+          from <strong>{{ studentDetails?.education[0]?.collegeName }}</strong
+          >.
+        </p>
+        <p>
+          I want to apply for a course in
+          <strong>{{ collegeDetail?.name }}</strong> for my degree.
+        </p>
+      </div>
+
+      <!-- Course Selection (Single Selection using Radio Buttons) -->
+      <div
+        class="course-list"
+        style="max-height: 400px; overflow-y: auto; padding-right: 15px"
+      >
+        <form>
+          <div *ngFor="let course of filteredCourses()" class="form-check mb-3">
+            <input
+              type="radio"
+              class="form-check-input"
+              name="selectedCourse"
+              id="course-{{ course.id }}"
+              [value]="course.id"
+              [(ngModel)]="selectedCourse"
+            />
+            <label
+              class="form-check-label"
+              for="course-{{ course.id }}"
+              style="font-size: 16px"
+            >
+              <strong>{{ course.name }}</strong>
+              <span class="text-muted"
+                >({{ course.seatsAvailable }} seats available)</span
+              >
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.close('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!selectedCourse"
+        (click)="applyForCourse()"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="courseSelectionModalLabel">
+        Apply for a Course
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <!-- Personalized Info Section -->
+      <div class="mb-4">
+        <p>
+          <strong
+            >I'm {{ studentDetails?.user?.firstName }}
+            {{ studentDetails?.user?.lastName }}</strong
+          >
+        </p>
+        <p>
+          I have completed my
+          <strong>{{ studentDetails?.education[0]?.degree }}</strong> degree
+          from <strong>{{ studentDetails?.education[0]?.collegeName }}</strong
+          >.
+        </p>
+        <p>
+          I want to apply for a course in
+          <strong>{{ collegeDetail?.name }}</strong> for my degree.
+        </p>
+      </div>
+
+      <!-- Course Selection (Single Selection using Radio Buttons) -->
+      <div
+        class="course-list"
+        style="max-height: 400px; overflow-y: auto; padding-right: 15px"
+      >
+        <form>
+          <div *ngFor="let course of filteredCourses()" class="form-check mb-3">
+            <input
+              type="radio"
+              class="form-check-input"
+              name="selectedCourse"
+              id="course-{{ course.id }}"
+              [value]="course.id"
+              [(ngModel)]="selectedCourse"
+              [disabled]="isCourseApplied(course.id)"
+            />
+            <label
+              class="form-check-label"
+              for="course-{{ course.id }}"
+              style="font-size: 16px"
+            >
+              <strong>{{ course.name }}</strong>
+              <span class="text-muted"
+                >({{ course.seatsAvailable }} seats available)</span
+              >
+              <span *ngIf="isCourseApplied(course.id)" class="text-danger ml-2">
+                (Already Applied)</span
+              >
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.close('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="!selectedCourse"
+        (click)="applyForCourse()"
+      >
+        Apply
+      </button>
+    </div>
+  </div>
+</ng-template>

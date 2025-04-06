@@ -1,0 +1,221 @@
+<main>
+  <nav class="navbar navbar-expand-lg bg-info">
+    <div class="container">
+      <div class="logo-container">
+        <img src="../../assets/img/logo/logooo.png" alt="" class="logo" />
+      </div>
+
+      <div class="d-lg-none ms-auto me-4">
+        <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+      </div>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-lg-5 me-lg-auto">
+          <li class="nav-item">
+            <a class="nav-link click-scroll" routerLink="/">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link click-scroll" routerLink="/view-colleges"
+              >Colleges</a
+            >
+          </li>
+          <!-- 
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link click-scroll" routerLink="/details/">My Profile</a>
+          </li> -->
+
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link click-scroll" routerLink="/my-favorites/"
+              >My Favorites</a
+            >
+          </li>
+
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link click-scroll" routerLink="/my-applications/"
+              >My Applications</a
+            >
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link click-scroll" href="#section_5">Contact</a>
+          </li> -->
+
+          <!-- <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarLightDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Pages</a
+            >
+
+            <ul
+              class="dropdown-menu dropdown-menu-light"
+              aria-labelledby="navbarLightDropdownMenuLink"
+            >
+              <li>
+                <a class="dropdown-item" href="topics-listing.html"
+                  >Topics Listing</a
+                >
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="contact.html">Contact Form</a>
+              </li>
+            </ul>
+          </li> -->
+        </ul>
+
+        <div class="d-none d-lg-block">
+          <a
+            routerLink="/auth/login"
+            class="navbar-icon smoothscroll d-flex justify-content-center"
+            *ngIf="!isLoggedIn()"
+          >
+            <i class="bi-person"></i>
+          </a>
+          <div class="d-flex align-items-center" *ngIf="isLoggedIn()">
+            <span class="user-name me-2 text-white">
+              {{ userData.firstName }} {{ userData.lastName }}
+            </span>
+            <div class="dropdown">
+              <a
+                class="navbar-icon smoothscroll d-flex align-items-center dropdown-toggle"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{{ userData.imageUrl }}"
+                  alt="User Icon"
+                  class="user-icon"
+                />
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="userDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" routerLink="/details"
+                    >View Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item logout-item" (click)="logout()"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+</main>
+
+<!-- <footer class="site-footer section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-12 mb-4 pb-2">
+        <div class="footer-container">
+          <img
+            src="../../assets/img/logo/logooo.png"
+            alt=""
+            class="footer-logo"
+          />
+          <a class="navbar-brand mb-2" href="index.html">
+            <i class="bi-back"></i>
+            <span>EduApply</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-6">
+        <h6 class="site-footer-title mb-3">Resources</h6>
+
+        <ul class="site-footer-links">
+          <li class="site-footer-link-item">
+            <a href="#" class="site-footer-link">Home</a>
+          </li>
+
+          <li class="site-footer-link-item">
+            <a href="#" class="site-footer-link">How it works</a>
+          </li>
+
+          <li class="site-footer-link-item">
+            <a href="#" class="site-footer-link">FAQs</a>
+          </li>
+
+          <li class="site-footer-link-item">
+            <a href="#" class="site-footer-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+        <h6 class="site-footer-title mb-3">Information</h6>
+
+        <p class="text-white d-flex mb-1">
+          <a href="tel: 01-5478962" class="site-footer-link"> 01-5478962 </a>
+        </p>
+
+        <p class="text-white d-flex">
+          <a href="mailto:info@cams.com" class="site-footer-link">
+            info&#64;cams.com
+          </a>
+        </p>
+      </div>
+
+      <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            English
+          </button>
+
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" type="button">Thai</button></li>
+
+            <li>
+              <button class="dropdown-item" type="button">Myanmar</button>
+            </li>
+
+            <li><button class="dropdown-item" type="button">Arabic</button></li>
+          </ul>
+        </div>
+
+        <p class="copyright-text mt-lg-5 mt-4">
+          Copyright © 2024 CAMS. All rights reserved. <br /><br />
+        </p>
+      </div>
+    </div>
+  </div>
+</footer> -->

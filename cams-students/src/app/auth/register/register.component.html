@@ -1,0 +1,163 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+  <div
+    class="p-5 bg-image"
+    style="
+      background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+      height: 300px;
+    "
+  ></div>
+
+  <div
+    class="card mx-4 mx-md-5 shadow-5-strong bg-body-tertiary"
+    style="margin-top: -100px; backdrop-filter: blur(30px)"
+  >
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Sign up now</h2>
+          <form [formGroup]="formStructure" (ngSubmit)="onSubmit()">
+            <!-- First Name & Last Name -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    id="form3Example1"
+                    formControlName="firstName"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example1"
+                    >First name</label
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    type="text"
+                    id="form3Example2"
+                    formControlName="lastName"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example2"
+                    >Last name</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Email & Age -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-outline mb-4">
+                  <input
+                    type="email"
+                    id="form3Example3"
+                    formControlName="email"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example3">Email</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="number"
+                    id="form3Example4"
+                    formControlName="age"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example4">Age</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="number"
+                    id="form3Example6"
+                    formControlName="phone"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example6"
+                    >Phone Number</label
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    type="file"
+                    id="form3Example7"
+                    (change)="onImageChange($event)"
+                    class="form-control"
+                    accept="image/*"
+                    formControlName="imageUrl"
+                  />
+                  <label class="form-label" for="form3Example7"
+                    >Upload Image</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Password & Confirm Password -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    id="form3Example5"
+                    formControlName="password"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example5">Password</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    id="form3Example6"
+                    formControlName="confirmPassword"
+                    class="form-control"
+                  />
+                  <label class="form-label" for="form3Example6"
+                    >Confirm Password</label
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="col-md-12 mb-4">
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="form3Example8"
+                  formControlName="address"
+                  class="form-control"
+                />
+                <label class="form-label" for="form3Example8">Address</label>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block mb-5">
+              Sign up
+            </button>
+
+            <div class="text-center mt-3">
+              <p>Already have an account?</p>
+              <a routerLink="/auth/login">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

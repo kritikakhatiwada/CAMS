@@ -1,0 +1,70 @@
+<div class="container mt-5">
+    <h2>Search Results</h2>
+    
+  
+  
+    <!-- Display the results in a card layout -->
+    <div *ngIf="results.length > 0" class="row">
+      <div class="col-md-4 mb-5 mt-3" *ngFor="let college of results">
+        <!-- <div class="card" style="width: 18rem;">
+          <img [src]="college.collegeLogo" class="card-img-top" alt="{{ college.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ college.name }}</h5>
+            <p class="card-text">{{ college.location }}</p>
+            <p class="card-text">{{ college.description || 'No description available' }}</p>
+            <a [routerLink]="['/college', college.id]" class="btn btn-primary">View Details</a>
+          </div>
+        </div> -->
+
+        <div class="college-card shadow-lg bg-white d-flex flex-column position-relative mb-5">
+          <!-- Cover Image -->
+          <div class="college-cover position-relative">
+            <img
+              src="{{ coverImage }}"
+              class="college-cover-image img-fluid w-100"
+              alt="{{ college.name }}"
+            />
+            <!-- Hover Eye Button -->
+            <div class="view-details-overlay d-flex justify-content-center align-items-center">
+              <a routerLink="/college/{{ college.id }}" class="btn btn-outline-primary">
+                <i class="bi-eye me-2"></i> View Details
+              </a>
+            </div>
+          </div>
+
+          <!-- College Logo -->
+          <div class="college-logo-container text-center mt-4">
+            <img
+              src="{{ college.collegeLogo }}"
+              class="college-logo img-fluid"
+              alt="{{ college.name }}"
+            />
+          </div>
+
+          <div class="college-details text-center mt-5">
+            <h5 class="mb-2">{{ college.name }}</h5>
+            <p class="mb-1 text-muted">{{ college.location }}</p>
+            <p class="mb-1 text-muted">{{ college.contact }}</p>
+            <p class="mb-1 text-muted">{{ college.email }}</p>
+
+            <!-- Star Rating -->
+            <div class="college-rating mt-3">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                <i
+                  class="bi"
+                  [ngClass]="i < college.avg_rating ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"
+                ></i>
+              </span>
+            </div>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+
+      <!-- Display loading message if no results yet -->
+      <div *ngIf="results.length === 0 && searchTerm">
+        <p>No results found for "{{ searchTerm }}".</p>
+      </div>
+  </div>
+  

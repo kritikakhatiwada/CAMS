@@ -1,0 +1,269 @@
+<section class="vh-100 gradient-custom bg-light">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <div class="card shadow-lg mb-4" style="border-radius: 15px">
+          <div class="card-body p-4">
+            <h3 class="mb-4 pb-2 text-center">Registration Form</h3>
+            <form [formGroup]="formStructure" (ngSubmit)="onSubmit()">
+              <!-- Personal Information -->
+              <div class="card p-4 mt-4 rounded">
+                <div class="card-title text-center mb-4">
+                  <h5 class="text-primary">Personal Information</h5>
+                </div>
+
+                <div class="row">
+                  <!-- Left Section: Personal Information -->
+                  <div class="col-md-6 mb-3">
+                    <p><strong>First Name:</strong> {{ userData.firstName }}</p>
+                    <p><strong>Last Name:</strong> {{ userData.lastName }}</p>
+                    <p><strong>Email:</strong> {{ userData.email }}</p>
+                    <p><strong>Address:</strong> {{ userData.address }}</p>
+                    <p><strong>Contact:</strong> {{ userData.phone }}</p>
+                  </div>
+
+                  <!-- Right Section: Image -->
+                  <div class="col-md-6 mb-3 text-center">
+                    <div class="profile-picture-container">
+                      <img
+                        [src]="studentData.user.imageUrl || 'assets/default-profile.png'"
+                        alt="Profile Picture"
+                        class="profile-picture"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <!-- Birth Date and Gender -->
+                  <div class="col-md-6 mb-3">
+                    <label for="birthDate" class="form-label">Birth Date</label>
+                    <input
+                      type="date"
+                      id="birthDate"
+                      class="form-control"
+                      formControlName="birthDate"
+                    />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">Gender</label>
+                    <div class="d-flex gap-3">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="femaleGender"
+                          value="Female"
+                          formControlName="gender"
+                        />
+                        <label class="form-check-label" for="femaleGender"
+                          >Female</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="maleGender"
+                          value="Male"
+                          formControlName="gender"
+                        />
+                        <label class="form-check-label" for="maleGender"
+                          >Male</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="otherGender"
+                          value="Other"
+                          formControlName="gender"
+                        />
+                        <label class="form-check-label" for="otherGender"
+                          >Other</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Parents Information -->
+              <div class="card p-3 mt-3">
+                <div class="text-center card-title">
+                  <p>Parents Information</p>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 mb-3">
+                    <label for="parentName" class="form-label"
+                      >Parents Name</label
+                    >
+                    <input
+                      type="text"
+                      id="parentName"
+                      class="form-control"
+                      formControlName="parentName"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="parentContact" class="form-label"
+                      >Parents Phone No</label
+                    >
+                    <input
+                      type="text"
+                      id="parentContact"
+                      class="form-control"
+                      formControlName="parentContact"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="parentEmail" class="form-label"
+                      >Parents Email</label
+                    >
+                    <input
+                      type="email"
+                      id="parentEmail"
+                      class="form-control"
+                      formControlName="parentEmail"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Education Section -->
+              <div class="card p-3 mt-3">
+                <div class="card-title text-center">
+                  <p>Education Information</p>
+                </div>
+                <!-- Education Input Form -->
+                <div class="">
+                  <form
+                    [formGroup]="collegeFormStructure"
+                    (ngSubmit)="addCollege()"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="collegeName" class="form-label"
+                          >College Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="collegeName"
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="startedYear" class="form-label"
+                          >Started Year</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="startedYear"
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="passedYear" class="form-label"
+                          >Passed Year</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="passedYear"
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="cgpa" class="form-label">cgpa</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="cgpa"
+                        />
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="degree" class="form-label">Degree</label>
+                        <select class="form-control" formControlName="degree">
+                          <option value="SEE">SEE</option>
+                          <option value="+2 Management">+2 Management</option>
+                          <option value="+2 Science">+2 Science</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Add Education Button -->
+                    <div class="text-center mt-3">
+                      <button type="submit" class="btn btn-success">
+                        + Add Education
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <!-- Display Added Education Cards -->
+                <!-- Display Added Education Cards -->
+                <!-- Display Education Details -->
+                <div *ngIf="educationCards.length > 0" class="mt-4">
+                  <h5 class="text-center text-primary mb-3">
+                    Education Details
+                  </h5>
+                  <div
+                    *ngFor="let education of educationCards; let i = index"
+                    class="card mb-3 shadow-sm"
+                  >
+                    <div class="card-body">
+                      <h6 class="card-title text-info">
+                        <strong>College Name:</strong>
+                        {{ education.collegeName }}
+                      </h6>
+                      <p class="card-text">
+                        <strong>Started Year:</strong>
+                        {{ education.startedYear }}
+                      </p>
+                      <p class="card-text">
+                        <strong>Passed Year:</strong> {{ education.passedYear }}
+                      </p>
+                      <p class="card-text">
+                        <strong>CGPA:</strong> {{ education.cgpa }}
+                      </p>
+                      <p class="card-text">
+                        <strong>Degree:</strong> {{ education.degree }}
+                      </p>
+
+                      <!-- Edit and Delete Buttons -->
+                      <div class="d-flex justify-content-end gap-2">
+                        <button
+                          class="btn btn-warning btn-sm"
+                          (click)="editCollege(i)"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          class="btn btn-danger btn-sm"
+                          (click)="deleteCollege(i)"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

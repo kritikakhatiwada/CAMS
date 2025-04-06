@@ -1,0 +1,36 @@
+{
+    "faculties": [
+      { "id": 1, "name": "Science" },
+      { "id": 2, "name": "Management" },
+      { "id": 3, "name": "Humanities" },
+      { "id": 4, "name": "Law" },
+      { "id": 5, "name": "Bachelor of Computer Applications (BCA)" },
+      { "id": 6, "name": "Bachelor of Information Technology (BIT)" },
+      { "id": 7, "name": "Bachelor of Business Administration (BBA)" },
+      { "id": 8, "name": "Bachelor of Business Studies (BBS)" },
+      { "id": 9, "name": "Bachelor of Arts (BA)" },
+      { "id": 10, "name": "Bachelor of Social Work (BSW)" },
+      { "id": 11, "name": "Mechanical Engineering" },
+      { "id": 12, "name": "Electrical Engineering" },
+      { "id": 13, "name": "Civil Engineering" },
+      { "id": 14, "name": "Computer Engineering" },
+      { "id": 15, "name": "Architecture" },
+      { "id": 16, "name": "Chemical Engineering" },
+      { "id": 17, "name": "BTech Food Technology" },
+      { "id": 18, "name": "Bachelor of Hotel Management (BHM)" },
+      { "id": 19, "name": "Bachelor of Business Management (BBM)" },
+      { "id": 20, "name": "Bachelor of Science in Microbiology" },
+      { "id": 21, "name": "Bachelor of Arts in Social Work (BASW)" },
+      { "id": 22, "name": "Bachelor of Travel and Tourism Management (BTTM)" },
+      { "id": 23, "name": "Bachelor of Information Management (BIM)" },
+      { "id": 24, "name": "Bachelor of Business Administration in Finance (BBA-Finance)" },
+      { "id": 25, "name": "Bachelor of Science in Computer Science and Information Technology (BSc. CSIT)" },
+      { "id": 26, "name": "BSc (Hons) Computing with Artificial Intelligence" },
+      { "id": 27, "name": "BSc (Hons) Computer Networking & IT Security" },
+      { "id": 28, "name": "BSc (Hons) Computing" },
+      { "id": 29, "name": "BA (Hons) Business Administration" },
+      { "id": 30, "name": "BSc (Hons) Multimedia Technologies" },
+      { "id": 31, "name": "BA (Hons) Accounting & Finance" }
+    ]
+  }
+  

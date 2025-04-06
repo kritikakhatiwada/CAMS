@@ -1,0 +1,60 @@
+<section class="explore-section section-padding" id="section_2">
+    <div class="container">
+      <div class="col-12 text-center">
+        <h2 class="mb-4">Faorites Colleges</h2>
+      </div>
+    </div>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 mb-4" *ngFor="let favorite of favoritesData?.favorites">
+          <div class="college-card shadow-lg bg-white d-flex flex-column position-relative">
+            <!-- Cover Image -->
+            <div class="college-cover position-relative">
+              <img
+                src="{{ coverImage }}"                
+                class="college-cover-image img-fluid w-100"
+                alt="{{ favorite.college.name }}"
+              />
+              <!-- Hover Eye Button -->
+              <div class="view-details-overlay d-flex justify-content-center align-items-center">
+                <a routerLink="/college/{{ favorite.college.id }}" class="btn btn-outline-primary me-2">
+                  <i class="bi-eye"></i>
+                </a>
+                <a (click)="removeFavorite(favorite.college.id)" class="btn btn-outline-danger">
+                    <i class="bi-trash"></i>
+                  </a>
+              </div>
+            </div>
+  
+            <!-- College Logo -->
+            <div class="college-logo-container text-center mt-4">
+              <img
+                src="{{ favorite.college.collegeLogo }}"
+                class="college-logo img-fluid"
+                alt="{{ favorite.college.name }}"
+              />
+            </div>
+  
+            <!-- College Details -->
+            <div class="college-details text-center mt-5">
+              <h5 class="mb-2">{{ favorite.college.name }}</h5>
+              <p class="mb-1 text-muted">{{ favorite.college.location }}</p>
+              <p class="mb-1 text-muted">{{ favorite.college.contact }}</p>
+              <p class="mb-1 text-muted">{{ favorite.college.email }}</p>
+  
+              <!-- Star Rating -->
+              <div class="college-rating mt-3">
+                <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                  <i
+                    class="bi"
+                    [ngClass]="i < favorite.college.avg_rating ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
